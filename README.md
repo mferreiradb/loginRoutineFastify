@@ -82,3 +82,17 @@
     - Exclui o usuário informado nos parametros da rota
         - Deve ser informado no parametro da rota o `id` do usuário que deve ser excluído
         - Obrigatória a validação do token JWT nos headers da aplicação
+
+## Features
+
+**Usuários**
+
+- [] Deve ser possível criar um usuário
+
+- [] Deve ser possível realizar o Login do usuário e gerar o token JWT
+
+- [] Deve ser possível alterar os dados do usuário
+
+- [] Deve ser possível excluir um usuário
+
+- [] Implementação de Hash de senha
