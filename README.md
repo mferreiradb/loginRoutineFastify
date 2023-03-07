@@ -87,9 +87,9 @@
 
 **Usuários**
 
-- [] Deve ser possível criar um usuário
+- [x] Deve ser possível criar um usuário
 
-- [] Deve ser possível realizar o Login do usuário e gerar o token JWT
+- [x] Deve ser possível realizar o Login do usuário e gerar o token JWT
 
 - [] Deve ser possível alterar os dados do usuário
 
