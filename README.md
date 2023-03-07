@@ -95,4 +95,4 @@
 
 - [] Deve ser possível excluir um usuário
 
-- [] Implementação de Hash de senha
+- [x] Implementação de Hash de senha
