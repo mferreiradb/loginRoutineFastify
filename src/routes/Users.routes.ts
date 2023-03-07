@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { FastifyInstance } from "fastify";
 import Users from "../@types/Users";
 import * as jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcryptjs'
 
 const secret = '89y123231bhj123123y789123bj123h89132b123h789'
 
@@ -10,6 +11,8 @@ const prisma = new PrismaClient()
 export default async function UsersRoutes(app: FastifyInstance) {
     app.post('/', async (req, res) => {
         const {login, password} = req.body as Users;
+        const salt = bcrypt.genSaltSync(10)
+        const hash = bcrypt.hashSync(password, salt)
 
         const user = await prisma.users.findFirst({
             where: {
@@ -24,7 +27,7 @@ export default async function UsersRoutes(app: FastifyInstance) {
         const newUser = await prisma.users.create({
             data: {
                 login,
-                password
+                password: hash
             }
         })
         return res.status(201).send({msg: `Usuário ${newUser.login} criado com sucesso`})
@@ -43,7 +46,9 @@ export default async function UsersRoutes(app: FastifyInstance) {
             return res.status(400).send({err: 'Usuário não encontrado'})
         }
 
-        if (password != user.password) {
+        const correctUser = bcrypt.compareSync(password, user.password)
+
+        if (!correctUser) {
             return res.status(400).send({err: 'Senha incorreta'})
         }
 
