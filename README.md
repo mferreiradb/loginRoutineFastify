@@ -91,7 +91,7 @@
 
 - [x] Deve ser possível realizar o Login do usuário e gerar o token JWT
 
-- [] Deve ser possível alterar os dados do usuário
+- [x] Deve ser possível alterar os dados do usuário
 
 - [] Deve ser possível excluir um usuário
 
