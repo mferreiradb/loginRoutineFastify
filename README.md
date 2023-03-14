@@ -9,7 +9,7 @@
 ![Badge](https://img.shields.io/badge/Fastify-^4.14.1-lightgrey?style=for-the-badge&logo=ghost)
 ![Badge](https://img.shields.io/badge/JWT-^9.0.0-ff69b4?style=for-the-badge&logo=ghost)
 ![Badge](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge&logo=ghost)
-![Badge](https://img.shields.io/badge/Status-In_progress-%237159c1?style=for-the-badge&logo=ghost)
+![Badge](https://img.shields.io/badge/Status-finished-brightgreen?style=for-the-badge&logo=ghost)
 
 <p align="center">O projeto tem o objetivo de fornecer um template para implementação de uma rotina de login utilizando <b>Fastfy</b>, <b>Prisma</b> e <b>JWT</b></p>
 
