@@ -99,4 +99,26 @@ export default async function UsersRoutes(app: FastifyInstance) {
 			return res.status(400).send({err: 'Erro interno!', error: err});
 		}
 	});
+
+	app.delete('/:id', async (req, res) => {
+		const {id} = req.params as Users;
+
+		const user = await prisma.users.findFirst({
+			where: {
+				id: id
+			}
+		});
+
+		if (!user) {
+			return res.status(404).send({err: 'Usuário não encontrado'});
+		}
+
+		await prisma.users.delete({
+			where: {
+				id: id
+			}
+		});
+
+		return res.status(200).send({msg: `Usuário [${user.login}] excluído com sucesso`});
+	});
 }

@@ -93,6 +93,6 @@
 
 - [x] Deve ser possível alterar os dados do usuário
 
-- [] Deve ser possível excluir um usuário
+- [x] Deve ser possível excluir um usuário
 
 - [x] Implementação de Hash de senha
