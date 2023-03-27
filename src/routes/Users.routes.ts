@@ -1,17 +1,17 @@
 import { PrismaClient } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 import Users from '../@types/Users';
-import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
-
-const secret = '89y123231bhj123123y789123bj123h89132b123h789';
+import { verifyJwt } from '../middlewares/JWTAuth';
 
 const prisma = new PrismaClient();
 
 export default async function UsersRoutes(app: FastifyInstance) {
 
-	app.get('/', async (req, res) => {
+	app.get('/',{onRequest: [verifyJwt]}, async (req, res) => {
+
 		const result = await prisma.users.findMany();
+		
         
 		return res.send(result);
 	});
@@ -60,14 +60,15 @@ export default async function UsersRoutes(app: FastifyInstance) {
 		}
 
 		try {
-			const token = jwt.sign({id: user.id, login: user.login}, secret, {expiresIn: '12h'});
+			//const token = jwt.sign({id: user.id, login: user.login}, secret, {expiresIn: '12h'});
+			const token = await res.jwtSign({login: user.login}, {sign: { sub: user.id}});
 			return res.send({token});
 		} catch(err) {
 			return res.status(400).send({msg: 'Falha interna', err});
 		}
 	});
 
-	app.put('/:id', async (req, res) => {
+	app.put('/:id', {onRequest: [verifyJwt]}, async (req, res) => {
 		const {id} = req.params as Users;
 		const {login, password} = req.body as Users;
 		const salt = bcrypt.genSaltSync(10);
@@ -100,7 +101,7 @@ export default async function UsersRoutes(app: FastifyInstance) {
 		}
 	});
 
-	app.delete('/:id', async (req, res) => {
+	app.delete('/:id', {onRequest: [verifyJwt]}, async (req, res) => {
 		const {id} = req.params as Users;
 
 		const user = await prisma.users.findFirst({
